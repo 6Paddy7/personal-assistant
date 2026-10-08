@@ -28,7 +28,7 @@ async def ignore_stranger(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 def main() -> None:
     app = Application.builder().token(token).build()
     owner = filters.Chat(chat_id=owner_chat_id)
-    app.add_handler(MessageHandler(owner & filters.TEXT & ~filters.COMMAND, echo))
+    app.add_handler(MessageHandler(owner & filters.UpdateType.MESSAGE & filters.TEXT & ~filters.COMMAND, echo))
     app.add_handler(MessageHandler(~owner, ignore_stranger))
     app.run_polling()
 
